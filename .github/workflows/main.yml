@@ -14,5 +14,5 @@ jobs:
           gh_token: ${{ secrets.GITHUB_TOKEN }}
           project_number: 4
           notify_for: "expiring_issues"
-          duedate_field_name: "Due Date"
+          duedate_field_name: "Planned End"
           notification_type: "comment"
