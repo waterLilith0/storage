@@ -1,31 +1,18 @@
-- name: Issue DueDate Reminder
-  # You may pin to the exact commit or the version.
-  # uses: petrandr/duedate_reminders@d42cbe3106197b065f6b3d1e4b545a2108e9b9a1
-  uses: petrandr/duedate_reminders@v1.3
-  with:
-    # The Personal Token
-    gh_token: 
-    # The Project Number
-    project_number: 
-    # The type of the notification are about to sent (expiring_issues,missing_duedate) 
-    notify_for: # default is expiring_issues
-    # The field name
-    duedate_field_name: # default is Due Date
-    # The type of notification (comment,aws_email)
-    notification_type: # default is comment
-    # The type of the repository owner (organization,user)
-    repository_owner_type: # default is user
-    # Determines if the GitHub is the enterprise ot not (True,False)
-    enterprise_github: # optional, default is False
-    # DryRun Mode (True,False)
-    dry_run: # optional, default is False
-    # The mail server address
-    smtp_server: # optional
-    # The mail server port
-    smtp_port: # optional
-    # The mail server username
-    smtp_username: # optional
-    # The mail server password
-    smtp_password: # optional
-    # The mail from email address
-    smtp_from_email: # optional
+name: 'Check Issues Due Date'
+
+on:
+  schedule:
+    - cron: '0 09 * * *'
+
+jobs:
+  reminder:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check duedate and write a comment
+        uses: petrandr/duedate_reminders@latest
+        with:
+          gh_token: ${{ secrets.GITHUB_TOKEN }}
+          project_number: 4
+          notify_for: "expiring_issues"
+          duedate_field_name: "Due Date"
+          notification_type: "comment"
