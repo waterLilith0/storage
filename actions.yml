@@ -1,2 +1,0 @@
-- name: Issue DueDate Reminder
-  uses: petrandr/duedate_reminders@v1.3
